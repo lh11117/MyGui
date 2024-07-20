@@ -30,6 +30,12 @@
     <ClInclude Include="WinXGuiFont.h">
       <Filter>头文件\WinXGui</Filter>
     </ClInclude>
+    <ClInclude Include="WinXGuiAll.h">
+      <Filter>头文件\WinXGui</Filter>
+    </ClInclude>
+    <ClInclude Include="WinXGuiLabel.h">
+      <Filter>头文件\WinXGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinXGui.cpp">
@@ -42,6 +48,9 @@
       <Filter>头文件\WinXGui</Filter>
     </ClCompile>
     <ClCompile Include="WinXGuiFont.cpp">
+      <Filter>头文件\WinXGui</Filter>
+    </ClCompile>
+    <ClCompile Include="WinXGuiLabel.cpp">
       <Filter>头文件\WinXGui</Filter>
     </ClCompile>
   </ItemGroup>

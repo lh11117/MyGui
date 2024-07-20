@@ -10,10 +10,3 @@ wxg::Button::Button(HWND parent, LPCWSTR title_, wxg::WinPos pos_, int event_id)
     font.font();
 }
 
-void wxg::Button::setText(LPCWSTR text) {
-    SetWindowText(hWnd, text);
-}
-
-void wxg::Button::setText(char* text) {
-    SetWindowTextA(hWnd, text);
-}

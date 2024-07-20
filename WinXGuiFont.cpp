@@ -1,6 +1,7 @@
 #include "WinXGuiFont.h"
 
 void wxg::Font::font() {
+    DeleteObject(hFont);
     hFont = CreateFont(-fontSize, -fontSize / 2, 0, 0, weight, italic, underline, strikeout, DEFAULT_CHARSET, OUT_CHARACTER_PRECIS, CLIP_CHARACTER_PRECIS, DEFAULT_QUALITY, FF_DONTCARE, fontName);
     SendMessage(hWnd, WM_SETFONT, (WPARAM)hFont, NULL);
     UpdateWindow(hWnd);

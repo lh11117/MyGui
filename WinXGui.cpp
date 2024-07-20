@@ -26,16 +26,17 @@ bool wxg::Window::create() {
 	return (int)hWnd!=0;
 }
 
-bool wxg::Window::create(int w, int h, int x, int y, LPCWSTR title, LPCWSTR className) {
-	if (className) className = className;
-	this->title = title;
+bool wxg::Window::create(int w, int h, int x, int y, LPCWSTR Title, LPCWSTR ClassName) {
+	if (ClassName) this->className = ClassName;
+	if (Title) this->title = Title;
 	pos = WinPos(w, h, x, y);
 	return create();
 }
 
-wxg::Window::Window(LPCWSTR className, LPCWSTR title)
+wxg::Window::Window(LPCWSTR ClassName, LPCWSTR Title)
 {
-	this->className = className; this->title = title;
+	if (ClassName) this->className = ClassName;
+	if (Title) this->title = Title;
 }
 
 wxg::Window::Window(int w, int h, int x, int y, LPCWSTR title)
@@ -59,6 +60,10 @@ void wxg::Window::loop() {
 }
 
 LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	PAINTSTRUCT ps;
+	HDC hdc;
+	RECT rect;
+	HBRUSH hBrush;
 	switch (message)
 	{
 	case WM_DESTROY:
@@ -83,8 +88,27 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 		}
 		break;
 	}
+	case WM_ERASEBKGND:
+		hdc = (HDC)wParam;
+		GetClientRect(hwnd, &rect);
+		hBrush = CreateSolidBrush(RGB(240, 240, 240));
+		FillRect(hdc, &rect, hBrush);
+		DeleteObject(hBrush);
+		return 1; // 返回非零值表示已处理背景擦除
+
 	default:
 		return DefWindowProc(hwnd, message, wParam, lParam);
 	}
 	return 0;
+}
+
+void wxg::Widget::SetText(LPCWSTR title)
+{
+	this->title = title;
+	SetWindowText(hWnd, title);
+}
+
+LPCWSTR wxg::Widget::GetText()
+{
+	return title;
 }

@@ -3,33 +3,54 @@
 #define WINXGUI_USE_NEW_STYLE
 #include "WinXGuiConfig.h"
 
-wxg::Window* win = new wxg::Window(L"1334545", L"WinXGui");
-wxg::Button* btn;
-void create(HWND hWnd, UINT, WPARAM, LPARAM) {
-	btn = new wxg::Button(hWnd, TEXT("按钮"), wxg::WinPos(100, 100, 20, 20), 50);
+wxg::Button *btn1, *btn2, *btn3;
+wxg::Label *lbl1, *lbl2, *lbl3;
+class MyGui : public wxg::Window
+{
+	static void create_msg(HWND, UINT, WPARAM, LPARAM);
+	static void command_msg(HWND, UINT, WPARAM, LPARAM);
+public:
+    MyGui() : wxg::Window(TEXT("MyGui"), TEXT("MyGui")) {
+		oncreate = create_msg;
+		oncommand = command_msg;
+		if (!create(500, 500, 100, 100)) {
+		    exit(GetLastError());
+		}
+		show();
+		loop();
+	}
+};
+
+void MyGui::create_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// Create controls
+	btn1 = new wxg::Button(hwnd, TEXT("Button 1"), wxg::WinPos(100, 40, 10, 10), 1);
+	btn2 = new wxg::Button(hwnd, TEXT("Button 2"), wxg::WinPos(100, 40, 10, 60), 2);
+	btn3 = new wxg::Button(hwnd, TEXT("Button 3"), wxg::WinPos(100, 40, 10, 110), 3);
+	lbl1 = new wxg::Label(hwnd, TEXT("Label 1"), wxg::WinPos(150, 40, 120, 10));
+	lbl2 = new wxg::Label(hwnd, TEXT("Label 2"), wxg::WinPos(150, 40, 120, 60));
+	lbl3 = new wxg::Label(hwnd, TEXT("Label 3"), wxg::WinPos(150, 40, 120, 110));
 }
 
-void command(HWND, UINT, WPARAM wParam, LPARAM) {
-	switch (wParam)
-	{
-	case 50: {
-		btn->font.SetFontWeight(18000);
-		btn->setText(TEXT("按钮被点击了"));
+void MyGui::command_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// Handle button clicks
+	switch (LOWORD(wParam)) {
+	case 1:
+		lbl1->SetText(TEXT("Button 1 clicked"));
 		break;
-	}
-	default:
+	case 2:
+		lbl2->SetText(TEXT("Button 2 clicked"));
+		break;
+	case 3:
+		lbl3->SetText(TEXT("Button 3 clicked"));
 		break;
 	}
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    win->oncreate = create;
-	win->oncommand = command;
-	bool a=win->create(500, 500, 100, 100, TEXT("窗口"));
-	if (!a) return 1;
-	win->show();
-	win->loop();
-	delete btn;
+    MyGui* gui = new MyGui();
+	delete gui;
 	return 0;
 }

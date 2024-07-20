@@ -10,12 +10,12 @@ class wxg::Font {
     BOOL italic = FALSE;          //斜体
     BOOL underline = FALSE;       //下划线
     BOOL strikeout = FALSE;       //删除线
-    LPCWSTR fontName = L"微软雅黑";  //字体名
+    LPCWSTR fontName = L"宋体";   //字体名
     HFONT hFont;
     HWND hWnd = 0;
 public:
     Font() { font(); };
-    Font(double size/* 标为需要提供参数默认值, 避免和另一个重载函数冲突 */, int weight = 400, BOOL italic = FALSE, BOOL underline = FALSE, BOOL strikeout = FALSE, LPCWSTR fontName = L"微软雅黑", HWND hWnd = NULL);
+    Font(double size/* 标为需要提供参数默认值, 避免和另一个重载函数冲突 */, int weight = 400, BOOL italic = FALSE, BOOL underline = FALSE, BOOL strikeout = FALSE, LPCWSTR fontName = L"宋体", HWND hWnd = NULL);
     ~Font();
     void setHWND(HWND hWnd);
     void font();

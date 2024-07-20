@@ -12,6 +12,7 @@ namespace WinXGui {
 	typedef void(*msg)(HWND, UINT, WPARAM, LPARAM);
 	class Font;
 	class Button;
+	class Label;
 	// window map
 	extern std::map<HWND, Window*> windowMap;
 }
@@ -46,8 +47,8 @@ public:
 		UnregisterClass(className, GetModuleHandle(0));
 	}
 	bool create();
-	bool create(wxg::WinPos pos, LPCWSTR title, LPCWSTR className = L"WinXGui") { this->pos = pos; title = title; return create(); };
-	bool create(int w, int h, int x, int y, LPCWSTR title, LPCWSTR className = NULL);
+	bool create(wxg::WinPos pos, LPCWSTR title = NULL, LPCWSTR className = NULL) { this->pos = pos; title = title; return create(); };
+	bool create(int w, int h, int x, int y, LPCWSTR title = NULL, LPCWSTR className = NULL);
 	void show() { ShowWindow(hWnd, SW_SHOW); };
 	void hide() { ShowWindow(hWnd, SW_HIDE); };
 	HWND hwnd() { return hWnd; };
@@ -65,8 +66,14 @@ protected:
 	HWND hWnd = 0;
 	LPCWSTR title;
 	WinPos pos;
-public:
+	BOOL visible = TRUE;
 	virtual int style() = 0;
+public:
+	inline BOOL IsVisible() { return visible; };
+	void Show() { visible = TRUE; ShowWindow(hWnd, SW_SHOW); };
+	void Hide() { visible = FALSE; ShowWindow(hWnd, SW_HIDE); };
 	Widget(LPCWSTR title_, WinPos pos_): title(title_), pos(pos_) {};
+	void SetText(LPCWSTR title);
+	LPCWSTR GetText();
 };
 #endif

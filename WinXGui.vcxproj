@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -128,15 +128,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="WinXGui.h" />
+    <ClInclude Include="WinXGuiAll.h" />
     <ClInclude Include="WinXGuiButton.h" />
     <ClInclude Include="WinXGuiConfig.h" />
     <ClInclude Include="WinXGuiFont.h" />
+    <ClInclude Include="WinXGuiLabel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinXGui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WinXGuiButton.cpp" />
     <ClCompile Include="WinXGuiFont.cpp" />
+    <ClCompile Include="WinXGuiLabel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
