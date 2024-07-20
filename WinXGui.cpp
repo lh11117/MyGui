@@ -108,7 +108,17 @@ void wxg::Widget::SetText(LPCWSTR title)
 	SetWindowText(hWnd, title);
 }
 
-LPCWSTR wxg::Widget::GetText()
+LPCWSTR wxg::Widget::GetText() const
 {
 	return title;
+}
+
+
+void wxg::Debug(const char* _Format, ...) {
+	char buffer[1024];
+	va_list args;
+	va_start(args, _Format);
+	vsprintf_s(buffer, _Format, args);
+	va_end(args);
+	OutputDebugStringA(buffer);
 }

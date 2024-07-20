@@ -131,6 +131,7 @@
     <ClInclude Include="WinXGuiAll.h" />
     <ClInclude Include="WinXGuiButton.h" />
     <ClInclude Include="WinXGuiConfig.h" />
+    <ClInclude Include="WinXGuiEntry.h" />
     <ClInclude Include="WinXGuiFont.h" />
     <ClInclude Include="WinXGuiLabel.h" />
   </ItemGroup>
@@ -138,6 +139,7 @@
     <ClCompile Include="WinXGui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WinXGuiButton.cpp" />
+    <ClCompile Include="WinXGuiEntry.cpp" />
     <ClCompile Include="WinXGuiFont.cpp" />
     <ClCompile Include="WinXGuiLabel.cpp" />
   </ItemGroup>

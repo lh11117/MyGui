@@ -5,8 +5,8 @@
 #include "WinXGuiFont.h"
 
 class wxg::Button : public wxg::Widget {
-public:
     virtual int style();
+public:
     Button(HWND parent, LPCWSTR title_, wxg::WinPos pos_, int event_id);
     wxg::Font font;
 };

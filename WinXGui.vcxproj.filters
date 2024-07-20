@@ -13,45 +13,51 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\WinXGui">
+    <Filter Include="WinXGui">
       <UniqueIdentifier>{1e30fa87-5213-4d62-a8c9-39a1dd75da35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinXGui.h">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClInclude>
     <ClInclude Include="WinXGuiButton.h">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClInclude>
     <ClInclude Include="WinXGuiConfig.h">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClInclude>
     <ClInclude Include="WinXGuiFont.h">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClInclude>
     <ClInclude Include="WinXGuiAll.h">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClInclude>
     <ClInclude Include="WinXGuiLabel.h">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
+    </ClInclude>
+    <ClInclude Include="WinXGuiEntry.h">
+      <Filter>WinXGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinXGui.cpp">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="WinXGuiButton.cpp">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClCompile>
     <ClCompile Include="WinXGuiFont.cpp">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
     </ClCompile>
     <ClCompile Include="WinXGuiLabel.cpp">
-      <Filter>头文件\WinXGui</Filter>
+      <Filter>WinXGui</Filter>
+    </ClCompile>
+    <ClCompile Include="WinXGuiEntry.cpp">
+      <Filter>WinXGui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 
 wxg::Button *btn1, *btn2, *btn3;
 wxg::Label *lbl1, *lbl2, *lbl3;
+wxg::Entry *ent1;
 class MyGui : public wxg::Window
 {
 	static void create_msg(HWND, UINT, WPARAM, LPARAM);
@@ -30,6 +31,7 @@ void MyGui::create_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	lbl1 = new wxg::Label(hwnd, TEXT("Label 1"), wxg::WinPos(150, 40, 120, 10));
 	lbl2 = new wxg::Label(hwnd, TEXT("Label 2"), wxg::WinPos(150, 40, 120, 60));
 	lbl3 = new wxg::Label(hwnd, TEXT("Label 3"), wxg::WinPos(150, 40, 120, 110));
+	ent1 = new wxg::Entry(hwnd, wxg::WinPos(200, 200, 20, 200), 4, TRUE);
 }
 
 void MyGui::command_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -38,12 +40,18 @@ void MyGui::command_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (LOWORD(wParam)) {
 	case 1:
 		lbl1->SetText(TEXT("Button 1 clicked"));
+		ent1->SetPassword(!ent1->IsPassword());
 		break;
 	case 2:
 		lbl2->SetText(TEXT("Button 2 clicked"));
+		ent1->SetMultiLine(!ent1->IsMultiLine());
 		break;
-	case 3:
+	case 3: {
 		lbl3->SetText(TEXT("Button 3 clicked"));
+		ent1->AppendText(TEXT("Hello, world! \n"));
+		break;
+	}
+	case 4:
 		break;
 	}
 }

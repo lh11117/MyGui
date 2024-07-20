@@ -6,6 +6,7 @@
 #include "WinXGuiButton.h"
 #include "WinXGuiLabel.h"
 #include "WinXGuiFont.h"
+#include "WinXGuiEntry.h"
 //#include "WinXGuiImage.h"
 //#include "WinXGuiWindow.h"
 

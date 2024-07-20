@@ -13,6 +13,8 @@ namespace WinXGui {
 	class Font;
 	class Button;
 	class Label;
+	class Entry;
+	void Debug(const char* _Format, ...);
 	// window map
 	extern std::map<HWND, Window*> windowMap;
 }
@@ -73,7 +75,7 @@ public:
 	void Show() { visible = TRUE; ShowWindow(hWnd, SW_SHOW); };
 	void Hide() { visible = FALSE; ShowWindow(hWnd, SW_HIDE); };
 	Widget(LPCWSTR title_, WinPos pos_): title(title_), pos(pos_) {};
-	void SetText(LPCWSTR title);
-	LPCWSTR GetText();
+	virtual void SetText(LPCWSTR title);
+	virtual LPCWSTR GetText() const;
 };
 #endif
