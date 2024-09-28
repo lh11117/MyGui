@@ -18,7 +18,7 @@ class wxg::Entry : public wxg::Widget {
 public:
     // 构造函数 (不推荐使用此构造函数)
     // 最好请使用 Entry(HWND parent, wxg::WinPos pos_, int event_id, BOOL valueMultiLine = FALSE, BOOL valuePassword = FALSE, BOOL valueReadOnly = FALSE, BOOL valueScrollBar = TRUE, BOOL valueAutoScroll = TRUE, int valueMaxLength = 0, LPCWSTR valueText = L"")
-    // 因为一些样式在创建控件后就无法修改了
+    // 因为一些样式在创建控件后可能就无法修改了
     // 例如：如果设置了多行显示，则无法再设置单行显示
     // 而这个构造函数是要执行创建控件的，所以某些样式就已经确定了! 
     Entry(HWND parent, wxg::WinPos pos_, int event_id);
@@ -55,7 +55,12 @@ public:
     LPCWSTR GetText();
     // 获取文本长度
     int GetTextLength() const;
+    // 追加文本
     void AppendText(LPCWSTR text);
+    // 获取编辑框光标位置
+    POINT GetCursorPosition() const;
+    // 设置编辑框光标位置
+    void SetCursorPosition(POINT pos);
     // 字体对象
     wxg::Font font;
 };

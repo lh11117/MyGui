@@ -39,6 +39,9 @@
     <ClInclude Include="WinXGuiEntry.h">
       <Filter>WinXGui</Filter>
     </ClInclude>
+    <ClInclude Include="WinXGuiCheckbox.h">
+      <Filter>WinXGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinXGui.cpp">
@@ -57,6 +60,9 @@
       <Filter>WinXGui</Filter>
     </ClCompile>
     <ClCompile Include="WinXGuiEntry.cpp">
+      <Filter>WinXGui</Filter>
+    </ClCompile>
+    <ClCompile Include="WinXGuiCheckbox.cpp">
       <Filter>WinXGui</Filter>
     </ClCompile>
   </ItemGroup>

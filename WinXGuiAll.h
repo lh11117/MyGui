@@ -7,6 +7,7 @@
 #include "WinXGuiLabel.h"
 #include "WinXGuiFont.h"
 #include "WinXGuiEntry.h"
+#include "WinXGuiCheckbox.h"
 //#include "WinXGuiImage.h"
 //#include "WinXGuiWindow.h"
 

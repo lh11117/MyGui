@@ -33,7 +33,7 @@ wxg::Entry::Entry(HWND parent, wxg::WinPos pos_, int event_id, BOOL valueMultiLi
 
 void wxg::Entry::SetMultiLine(BOOL value) { MultiLine = value; restyle(); }
 void wxg::Entry::SetPassword(BOOL value) { Password = value; restyle(); }
-void wxg::Entry::SetReadOnly(BOOL value) { ReadOnly = value; restyle(); }
+void wxg::Entry::SetReadOnly(BOOL value) { ReadOnly = value; restyle(); SendMessage(hWnd, EM_SETREADONLY, value, 0); }
 void wxg::Entry::SetScrollBar(BOOL value) { ScrollBar = value; restyle(); }
 void wxg::Entry::SetAutoScroll(BOOL value) { AutoScroll = value; restyle(); }
 void wxg::Entry::SetMaxLength(int value) { MaxLength = value; restyle(); }
@@ -67,8 +67,21 @@ int wxg::Entry::GetTextLength() const
     return GetWindowTextLength(hWnd);
 }
 
+POINT wxg::Entry::GetCursorPosition() const
+{
+    DWORD start, end;
+    SendMessage(hWnd, EM_GETSEL, (WPARAM)&start, (LPARAM)&end);
+    return { (long)start, (long)end };
+}
+
+void wxg::Entry::SetCursorPosition(POINT pos)
+{
+    SendMessage(hWnd, EM_SETSEL, (WPARAM)pos.x, (LPARAM)pos.y);
+}
+
 void wxg::Entry::AppendText(LPCWSTR t)
 {
+    POINT cursorPos = GetCursorPosition();
     int length = GetTextLength();
     int len = wcslen(t);
     wchar_t* text = new wchar_t[length + len + 1];
@@ -76,4 +89,5 @@ void wxg::Entry::AppendText(LPCWSTR t)
     wcscat_s(text, length + len + 1, t);
     SetText(text);
     delete[] text;
+    SetCursorPosition(cursorPos);
 }
