@@ -11,5 +11,6 @@
 //#include "WinXGuiImage.h"
 //#include "WinXGuiWindow.h"
 
+#define WinXGuiVersion "0.1"
 
 #endif // !WINXGUIALL_H
