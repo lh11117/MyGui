@@ -84,15 +84,18 @@ protected:
 	WinPos pos;
 	BOOL visible = TRUE;
 	BOOL enabled = TRUE;
+	HMENU wid;
 	virtual int style() = 0;
+	void RegisterWidget(HWND);
 public:
 	inline BOOL IsVisible() { return visible; };
 	void Show() { visible = TRUE; ShowWindow(hWnd, SW_SHOW); };
 	void Hide() { visible = FALSE; ShowWindow(hWnd, SW_HIDE); };
 	void SetEnabled(BOOL enabled);
 	BOOL IsEnabled() { return enabled; };
-	Widget(LPCWSTR title_, WinPos pos_) {};
+	Widget(LPCWSTR title_, WinPos pos_);
 	virtual void SetText(LPCWSTR title);
 	virtual LPCWSTR GetText() const;
+	Msg oncommand = nullptr;
 };
 #endif

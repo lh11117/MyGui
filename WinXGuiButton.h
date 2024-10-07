@@ -7,7 +7,7 @@
 class wxg::Button : public wxg::Widget {
     virtual int style();
 public:
-    Button(HWND parent, LPCWSTR title_, wxg::WinPos pos_, int event_id);
+    Button(wxg::Window* parent, LPCWSTR title_, wxg::WinPos pos_);
     wxg::Font font;
 };
 #endif

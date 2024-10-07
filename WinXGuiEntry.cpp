@@ -11,13 +11,14 @@ void wxg::Entry::restyle()
     SetWindowLong(hWnd, GWL_STYLE, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style());
 }
 
-wxg::Entry::Entry(HWND parent, wxg::WinPos pos_, int event_id) : WinXGui::Widget(L"", pos_) {
-    hWnd = CreateWindow(TEXT("edit"), NULL, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style(), pos_.x, pos_.y, pos_.w, pos_.h, parent, (HMENU)event_id, GetModuleHandle(0), NULL);
+wxg::Entry::Entry(wxg::Window* parent, wxg::WinPos pos_) : WinXGui::Widget(L"", pos_) {
+    hWnd = CreateWindow(TEXT("edit"), NULL, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style(), pos_.x, pos_.y, pos_.w, pos_.h, parent->hwnd(), wid, GetModuleHandle(0), NULL);
+    RegisterWidget(hWnd);
     font.setHWND(hWnd);
     font.font();
 }
 
-wxg::Entry::Entry(HWND parent, wxg::WinPos pos_, int event_id, BOOL valueMultiLine, BOOL valuePassword, BOOL valueReadOnly, BOOL valueScrollBar, BOOL valueAutoScroll, int valueMaxLength, LPCWSTR valueText)
+wxg::Entry::Entry(wxg::Window* parent, wxg::WinPos pos_, BOOL valueMultiLine, BOOL valuePassword, BOOL valueReadOnly, BOOL valueScrollBar, BOOL valueAutoScroll, int valueMaxLength, LPCWSTR valueText)
     : WinXGui::Widget(L"", pos_)
 {
     MultiLine = valueMultiLine;
@@ -26,7 +27,8 @@ wxg::Entry::Entry(HWND parent, wxg::WinPos pos_, int event_id, BOOL valueMultiLi
     ScrollBar = valueScrollBar;
     AutoScroll = valueAutoScroll;
     MaxLength = valueMaxLength;
-    hWnd = CreateWindow(TEXT("edit"), valueText, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style(), pos_.x, pos_.y, pos_.w, pos_.h, parent, (HMENU)event_id, GetModuleHandle(0), NULL);
+    hWnd = CreateWindow(TEXT("edit"), valueText, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style(), pos_.x, pos_.y, pos_.w, pos_.h, parent->hwnd(), wid, GetModuleHandle(0), NULL);
+    RegisterWidget(hWnd);
     font.setHWND(hWnd);
     font.font();
 }

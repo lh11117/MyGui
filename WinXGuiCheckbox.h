@@ -7,7 +7,7 @@
 class wxg::Checkbox : public wxg::Widget {
     virtual int style();
 public:
-    Checkbox(HWND parent, LPCWSTR title_, wxg::WinPos pos_, int event_id);
+    Checkbox(wxg::Window* parent, LPCWSTR title_, wxg::WinPos pos_);
     // 是否选中
     BOOL IsChecked();
     // 设置是否选中

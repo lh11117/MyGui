@@ -14,7 +14,7 @@ class wxg::Label :
     virtual int style() { return (HorizontalCenter ?SS_CENTER:0) | (VerticalCenter ?SS_CENTERIMAGE:0); }
 public:
     wxg::Font font;
-    Label(HWND parent, LPCWSTR title, wxg::WinPos pos);
+    Label(wxg::Window* parent, LPCWSTR title, wxg::WinPos pos);
     BOOL IsHorizontalCenter() { return this->HorizontalCenter; }
     BOOL IsVerticalCenter() { return this->VerticalCenter; }
     void SetHorizontalCenter(BOOL center) { this->HorizontalCenter = center; SetWindowLong(hWnd, GWL_STYLE, WS_CHILD | WS_VISIBLE | style()); SetText(title); }

@@ -6,6 +6,7 @@ namespace WinXGui {
 static bool IsRegisteredWindowClass = false;
 static wxg::App *app = nullptr;
 #define IsAppCreated (bool)app
+static HMENU lastw = (HMENU)1000;
 
 
 static class WidgetManager {
@@ -159,9 +160,13 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 		break;
 	}
 	case WM_COMMAND: {
-		wxg::Window* window = FindByHWND(hwnd);
+		/*wxg::Window* window = FindByHWND(hwnd);
 		if (window && window->oncommand) {
 			window->oncommand(hwnd, message, wParam, lParam);
+		}*/
+		wxg::Widget* widget = wmanager.findByHmenu((HMENU)LOWORD(wParam));
+		if (widget && widget->oncommand) {
+           widget->oncommand(hwnd, message, wParam, lParam);
 		}
 		break;
 	}
@@ -196,9 +201,12 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 	return 0;
 }
 
-wxg::Widget::Widget(LPCWSTR title_, WinPos pos_) : title(title_), pos(pos_) {
-	wmanager.storeWidget()
-};
+wxg::Widget::Widget(LPCWSTR title_, WinPos pos_) : title(title_), pos(pos_), wid(++lastw) { };
+
+void wxg::Widget::RegisterWidget(HWND hwnd)
+{
+	wmanager.storeWidget(this, hwnd, wid);
+}
 
 void wxg::Widget::SetText(LPCWSTR title)
 {
@@ -217,6 +225,7 @@ void wxg::Widget::SetEnabled(BOOL enabled_)
 		return; 
 	this->enabled = enabled_; 
 	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) ^ WS_DISABLED);
+	UpdateWindow(hWnd);
 };
 
 void wxg::DebugWithSize(size_t bufferSize, const char* _Format, ...) {

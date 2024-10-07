@@ -19,13 +19,13 @@ class wxg::Entry : public wxg::Widget {
     void restyle();
 public:
     // 构造函数 (不推荐使用此构造函数)
-    // 最好请使用 Entry(HWND parent, wxg::WinPos pos_, int event_id, BOOL valueMultiLine = FALSE, BOOL valuePassword = FALSE, BOOL valueReadOnly = FALSE, BOOL valueScrollBar = TRUE, BOOL valueAutoScroll = TRUE, int valueMaxLength = 0, LPCWSTR valueText = L"")
+    // 最好请使用 Entry(wxg::Window* parent, wxg::WinPos pos_, BOOL valueMultiLine = FALSE, BOOL valuePassword = FALSE, BOOL valueReadOnly = FALSE, BOOL valueScrollBar = TRUE, BOOL valueAutoScroll = TRUE, int valueMaxLength = 0, LPCWSTR valueText = L"")
     // 因为一些样式在创建控件后可能就无法修改了
     // 例如：如果设置了多行显示，则无法再设置单行显示
     // 而这个构造函数是要执行创建控件的，所以某些样式就已经确定了! 
-    Entry(HWND parent, wxg::WinPos pos_, int event_id);
+    Entry(wxg::Window* parent, wxg::WinPos pos_);
     // 构造函数 (推荐使用此构造函数)
-    Entry(HWND parent, wxg::WinPos pos_, int event_id, BOOL valueMultiLine = FALSE, BOOL valuePassword = FALSE, BOOL valueReadOnly = FALSE, BOOL valueScrollBar = TRUE, BOOL valueAutoScroll = TRUE, int valueMaxLength = 0, LPCWSTR valueText = L"");
+    Entry(wxg::Window* parent, wxg::WinPos pos_, BOOL valueMultiLine = FALSE, BOOL valuePassword = FALSE, BOOL valueReadOnly = FALSE, BOOL valueScrollBar = TRUE, BOOL valueAutoScroll = TRUE, int valueMaxLength = 0, LPCWSTR valueText = L"");
     // 设置是否多行显示
     void SetMultiLine(BOOL value);
     // 设置是否显示密码
