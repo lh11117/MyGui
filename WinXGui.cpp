@@ -5,8 +5,38 @@ namespace WinXGui {
 };
 static bool IsRegisteredWindowClass = false;
 static wxg::App *app = nullptr;
-#define IsAppCreated app
+#define IsAppCreated (bool)app
 
+
+static class WidgetManager {
+public:
+	void storeWidget(wxg::Widget* widget, HWND hwnd, HMENU hmenu) {
+		widgetMap[widget] = std::make_pair(hwnd, hmenu);
+		hwndMap[hwnd] = widget;
+		hmenuMap[hmenu] = widget;
+	}
+
+	wxg::Widget* findByHwnd(HWND hwnd) {
+		auto it = hwndMap.find(hwnd);
+		if (it != hwndMap.end()) {
+			return it->second; // 返回找到的 Widget 指针
+		}
+		return nullptr; // 未找到返回 nullptr
+	}
+
+	wxg::Widget* findByHmenu(HMENU hmenu) {
+		auto it = hmenuMap.find(hmenu);
+		if (it != hmenuMap.end()) {
+			return it->second; // 返回找到的 Widget 指针
+		}
+		return nullptr; // 未找到返回 nullptr
+	}
+
+private:
+	std::map<wxg::Widget*, std::pair<HWND, HMENU>> widgetMap;
+	std::map<HWND, wxg::Widget*> hwndMap;
+	std::map<HMENU, wxg::Widget*> hmenuMap;
+} wmanager;
 
 wxg::App::App() {
 }
@@ -166,6 +196,10 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 	return 0;
 }
 
+wxg::Widget::Widget(LPCWSTR title_, WinPos pos_) : title(title_), pos(pos_) {
+	wmanager.storeWidget()
+};
+
 void wxg::Widget::SetText(LPCWSTR title)
 {
 	this->title = title;
@@ -177,6 +211,33 @@ LPCWSTR wxg::Widget::GetText() const
 	return title;
 }
 
+void wxg::Widget::SetEnabled(BOOL enabled_)
+{
+	if (this->enabled == enabled_) 
+		return; 
+	this->enabled = enabled_; 
+	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) ^ WS_DISABLED);
+};
+
+void wxg::DebugWithSize(size_t bufferSize, const char* _Format, ...) {
+	char* buffer = new char[bufferSize];
+
+	va_list args;
+	va_start(args, _Format);
+
+	// Use vsnprintf instead of vsnprintf_s
+	int length = vsnprintf(buffer, bufferSize, _Format, args);
+
+	va_end(args);
+
+	// Check if buffer overflow occurred
+	if (length < 0 || length >= bufferSize) {
+		OutputDebugStringA("wxg_error: Debug message truncated due to overflow.\n");
+	}
+	else {
+		OutputDebugStringA(buffer);
+	}
+}
 
 void wxg::Debug(const char* _Format, ...) {
 	const size_t bufferSize = 1024;
@@ -192,7 +253,7 @@ void wxg::Debug(const char* _Format, ...) {
 
 	// Check if buffer overflow occurred
 	if (length < 0 || length >= bufferSize) {
-		OutputDebugStringA("wxg_error: Debug message truncated due to overflow.\n");
+		DebugWithSize(length + 1, _Format, args);
 	}
 	else {
 		OutputDebugStringA(buffer);

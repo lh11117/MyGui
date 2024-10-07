@@ -11,6 +11,8 @@ class wxg::Entry : public wxg::Widget {
     BOOL ScrollBar = TRUE;
     BOOL AutoScroll = TRUE;
     int MaxLength = 0;
+    HWND parent;
+    int hid;
     // 样式
     virtual int style();
     // 重绘控件

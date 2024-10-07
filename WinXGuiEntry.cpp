@@ -8,11 +8,11 @@ int wxg::Entry::style() {
 void wxg::Entry::restyle()
 {
     wxg::Debug("style: MultiLine=%d, Password=%d, ReadOnly=%d, ScrollBar=%d, AutoScroll=%d, style=%d\n", MultiLine, Password, ReadOnly, ScrollBar, AutoScroll, style());
-    SetWindowLong(hWnd, GWL_STYLE, WS_CHILD | WS_VISIBLE | style());
+    SetWindowLong(hWnd, GWL_STYLE, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style());
 }
 
 wxg::Entry::Entry(HWND parent, wxg::WinPos pos_, int event_id) : WinXGui::Widget(L"", pos_) {
-    hWnd = CreateWindow(TEXT("edit"), NULL, WS_CHILD | WS_VISIBLE | style(), pos_.x, pos_.y, pos_.w, pos_.h, parent, (HMENU)event_id, GetModuleHandle(0), NULL);
+    hWnd = CreateWindow(TEXT("edit"), NULL, WS_CHILD | WS_VISIBLE | WS_TABSTOP | style(), pos_.x, pos_.y, pos_.w, pos_.h, parent, (HMENU)event_id, GetModuleHandle(0), NULL);
     font.setHWND(hWnd);
     font.font();
 }

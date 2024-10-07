@@ -20,6 +20,7 @@ namespace WinXGui {
 	class Label;
 	class Entry;
 	class Checkbox;
+	void DebugWithSize(const size_t bufferSize, const char* _Format, ...);
 	void Debug(const char* _Format, ...);
 	// window map
 	extern std::map<HWND, Window*> windowMap;
@@ -82,12 +83,15 @@ protected:
 	LPCWSTR title;
 	WinPos pos;
 	BOOL visible = TRUE;
+	BOOL enabled = TRUE;
 	virtual int style() = 0;
 public:
 	inline BOOL IsVisible() { return visible; };
 	void Show() { visible = TRUE; ShowWindow(hWnd, SW_SHOW); };
 	void Hide() { visible = FALSE; ShowWindow(hWnd, SW_HIDE); };
-	Widget(LPCWSTR title_, WinPos pos_): title(title_), pos(pos_) {};
+	void SetEnabled(BOOL enabled);
+	BOOL IsEnabled() { return enabled; };
+	Widget(LPCWSTR title_, WinPos pos_) {};
 	virtual void SetText(LPCWSTR title);
 	virtual LPCWSTR GetText() const;
 };

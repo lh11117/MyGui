@@ -1,6 +1,6 @@
-#include "WinXGuiAll.h"
-
+#define WINXGUI_SHOW_DEBUG
 #define WINXGUI_USE_NEW_STYLE
+#include "WinXGuiAll.h"
 #include "WinXGuiConfig.h"
 
 wxg::Button *btn1, *btn2, *btn3, *btn4;
@@ -43,6 +43,7 @@ void MyGui::create_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	ent1 = new wxg::Entry(hwnd, wxg::WinPos(200, 200, 20, 200), 4, TRUE);
 	chk1 = new wxg::Checkbox(hwnd, TEXT("ReadOnly"), wxg::WinPos(100, 20, 250, 200), 5);
 	btn4 = new wxg::Button(hwnd, TEXT("Another Window"), wxg::WinPos(150, 40, 250, 250), 6);
+	btn4->SetEnabled(0);
 }
 
 void MyGui::command_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -54,6 +55,7 @@ void MyGui::command_msg(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case 2:
 		lbl2->SetText(TEXT("Button 2 clicked"));
+		ent1->SetPassword(1);
 		break;
 	case 3: {
 		lbl3->SetText(TEXT("Button 3 clicked"));
