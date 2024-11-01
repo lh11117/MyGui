@@ -1,14 +1,14 @@
-#define WINXGUI_SHOW_DEBUG
-#define WINXGUI_USE_NEW_STYLE
-#include "WinXGuiAll.h"
-#include "WinXGuiConfig.h"
+#define MYGUI_SHOW_DEBUG
+#define MYGUI_USE_NEW_STYLE
+#include "MyGuiAll.h"
+#include "MyGuiConfig.h"
 
-wxg::Button *btn1, *btn2, *btn3, *btn4;
-wxg::Label *lbl1, *lbl2, *lbl3;
-wxg::Entry *ent1;
-wxg::Checkbox *chk1, *chk2;
-wxg::Window w(TEXT("Another Window"));
-class MyGui : public wxg::Window
+myg::Button *btn1, *btn2, *btn3, *btn4, *btn_close;
+myg::Label *lbl1, *lbl2, *lbl3;
+myg::Entry *ent1;
+myg::Checkbox *chk1, *chk2;
+myg::Window w(TEXT("Another Window"));
+class MineGui : public myg::Window
 {
 	static int close_msg(HWND h, UINT, WPARAM, LPARAM) {
 		bool result = MessageBox(h,L"Are you sure to exit?",L"Tip",MB_YESNO)==IDNO;
@@ -18,21 +18,22 @@ class MyGui : public wxg::Window
 		return result;
 	}
 public:
-    MyGui() : wxg::Window(TEXT("MyGui")) {
+	MineGui() : myg::Window(TEXT("MyGui")) {
 		onclose = close_msg;
 		if (!Create(500, 500, 100, 100)) {
 		    exit(GetLastError());
 		}
-		btn1 = new wxg::Button(this, TEXT("Button 1"), wxg::WinPos(100, 40, 10, 10));
-		btn2 = new wxg::Button(this, TEXT("Button 2"), wxg::WinPos(100, 40, 10, 60));
-		btn3 = new wxg::Button(this, TEXT("Button 3"), wxg::WinPos(100, 40, 10, 110));
-		lbl1 = new wxg::Label(this, TEXT("Label 1"), wxg::WinPos(150, 40, 120, 10));
-		lbl2 = new wxg::Label(this, TEXT("Label 2"), wxg::WinPos(150, 40, 120, 60));
-		lbl3 = new wxg::Label(this, TEXT("Label 3"), wxg::WinPos(150, 40, 120, 110));
-		ent1 = new wxg::Entry(this, wxg::WinPos(200, 200, 20, 200), TRUE);
-		chk1 = new wxg::Checkbox(this, TEXT("ReadOnly"), wxg::WinPos(100, 20, 250, 200));
-		chk2 = new wxg::Checkbox(this, TEXT("Enabled Button"), wxg::WinPos(150, 20, 250, 250));
-		btn4 = new wxg::Button(this, TEXT("Another Window"), wxg::WinPos(150, 40, 250, 300));
+		btn1 = new myg::Button(this, TEXT("Button 1"), myg::WinPos(100, 40, 10, 10));
+		btn2 = new myg::Button(this, TEXT("Button 2"), myg::WinPos(100, 40, 10, 60));
+		btn3 = new myg::Button(this, TEXT("Button 3"), myg::WinPos(100, 40, 10, 110));
+		btn_close = new myg::CancelButton(this, TEXT("Close"), myg::WinPos(100, 40, 350, 400));
+		lbl1 = new myg::Label(this, TEXT("Label 1"), myg::WinPos(150, 40, 120, 10));
+		lbl2 = new myg::Label(this, TEXT("Label 2"), myg::WinPos(150, 40, 120, 60));
+		lbl3 = new myg::Label(this, TEXT("Label 3"), myg::WinPos(150, 40, 120, 110));
+		ent1 = new myg::Entry(this, myg::WinPos(200, 200, 20, 200), TRUE);
+		chk1 = new myg::Checkbox(this, TEXT("ReadOnly"), myg::WinPos(100, 20, 250, 200));
+		chk2 = new myg::Checkbox(this, TEXT("Enabled Button"), myg::WinPos(150, 20, 250, 250));
+		btn4 = new myg::Button(this, TEXT("Another Window"), myg::WinPos(150, 40, 250, 300));
 		btn4->SetEnabled(1);
 		btn1->oncommand = btn1_click;
 		btn2->oncommand = btn2_click;
@@ -41,9 +42,14 @@ public:
 		ent1->oncommand = ent1_inputing;
 		chk1->oncommand = chk1_checked;
 		chk2->oncommand = chk2_checked;
+		btn_close->oncommand = close_;
 		Show();
 	}
 
+
+	static void close_(HWND, UINT, WPARAM, LPARAM) {
+		exit(0);
+	}
 	static void btn1_click(HWND, UINT, WPARAM, LPARAM) {
 		lbl1->SetText(TEXT("Button 1 clicked"));
 	}
@@ -82,11 +88,11 @@ int OnAnotherWindowClose(HWND, UINT, WPARAM, LPARAM) {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	wxg::App app(L"MyGui");
-	MyGui* gui = new MyGui();
+	myg::App app(L"MyGui");
+	MineGui* gui = new MineGui();
 	w.Create(500, 500, 600, 600);
 	w.onclose = OnAnotherWindowClose;
-	wxg::Label(&w, TEXT("There is nothing!"), wxg::WinPos(150, 40, 120, 10));
+	myg::Label(&w, TEXT("There is nothing!"), myg::WinPos(150, 40, 120, 10));
 	app.Exec();
 	delete gui;
 	return 0;

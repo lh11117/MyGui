@@ -13,57 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="WinXGui">
+    <Filter Include="MyGui">
       <UniqueIdentifier>{1e30fa87-5213-4d62-a8c9-39a1dd75da35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WinXGui.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGui.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiButton.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiButton.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiConfig.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiConfig.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiFont.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiFont.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiAll.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiAll.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiLabel.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiLabel.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiEntry.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiEntry.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="WinXGuiCheckbox.h">
-      <Filter>WinXGui</Filter>
+    <ClInclude Include="MyGuiCheckbox.h">
+      <Filter>MyGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinXGui.cpp">
-      <Filter>WinXGui</Filter>
+    <ClCompile Include="MyGui.cpp">
+      <Filter>MyGui</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="WinXGuiButton.cpp">
-      <Filter>WinXGui</Filter>
+    <ClCompile Include="MyGuiButton.cpp">
+      <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="WinXGuiFont.cpp">
-      <Filter>WinXGui</Filter>
+    <ClCompile Include="MyGuiFont.cpp">
+      <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="WinXGuiLabel.cpp">
-      <Filter>WinXGui</Filter>
+    <ClCompile Include="MyGuiLabel.cpp">
+      <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="WinXGuiEntry.cpp">
-      <Filter>WinXGui</Filter>
+    <ClCompile Include="MyGuiEntry.cpp">
+      <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="WinXGuiCheckbox.cpp">
-      <Filter>WinXGui</Filter>
+    <ClCompile Include="MyGuiCheckbox.cpp">
+      <Filter>MyGui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

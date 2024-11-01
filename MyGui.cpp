@@ -1,56 +1,56 @@
-#include "WinXGui.h"
+#include "MyGui.h"
 
-namespace WinXGui {
+namespace MyGui {
 	std::map<HWND, Window*> windowMap;
 };
 static bool IsRegisteredWindowClass = false;
-static wxg::App *app = nullptr;
+static myg::App *app = nullptr;
 #define IsAppCreated (bool)app
 static HMENU lastw = (HMENU)1000;
 
 
 static class WidgetManager {
 public:
-	void storeWidget(wxg::Widget* widget, HWND hwnd, HMENU hmenu) {
+	void storeWidget(myg::Widget* widget, HWND hwnd, HMENU hmenu) {
 		widgetMap[widget] = std::make_pair(hwnd, hmenu);
 		hwndMap[hwnd] = widget;
 		hmenuMap[hmenu] = widget;
 	}
 
-	wxg::Widget* findByHwnd(HWND hwnd) {
+	myg::Widget* findByHwnd(HWND hwnd) {
 		auto it = hwndMap.find(hwnd);
 		if (it != hwndMap.end()) {
-			return it->second; // 返回找到的 Widget 指针
+			return it->second;
 		}
-		return nullptr; // 未找到返回 nullptr
+		return nullptr;
 	}
 
-	wxg::Widget* findByHmenu(HMENU hmenu) {
+	myg::Widget* findByHmenu(HMENU hmenu) {
 		auto it = hmenuMap.find(hmenu);
 		if (it != hmenuMap.end()) {
-			return it->second; // 返回找到的 Widget 指针
+			return it->second;
 		}
-		return nullptr; // 未找到返回 nullptr
+		return nullptr;
 	}
 
 private:
-	std::map<wxg::Widget*, std::pair<HWND, HMENU>> widgetMap;
-	std::map<HWND, wxg::Widget*> hwndMap;
-	std::map<HMENU, wxg::Widget*> hmenuMap;
+	std::map<myg::Widget*, std::pair<HWND, HMENU>> widgetMap;
+	std::map<HWND, myg::Widget*> hwndMap;
+	std::map<HMENU, myg::Widget*> hmenuMap;
 } wmanager;
 
-wxg::App::App() {
+myg::App::App() {
 }
 
-wxg::App::App(LPCWSTR ClassName) {
+myg::App::App(LPCWSTR ClassName) {
 	Init(ClassName);
 }
 
-wxg::App::~App() {
+myg::App::~App() {
 	UnregisterClass(AppClassName, GetModuleHandle(0));
 }
 
-void wxg::App::Init(LPCWSTR ClassName){
+void myg::App::Init(LPCWSTR ClassName){
 	if (IsAppCreated) {
 		throw std::runtime_error("App class only can be created once!");
 	}
@@ -58,11 +58,11 @@ void wxg::App::Init(LPCWSTR ClassName){
 	AppClassName = ClassName;
 }
 
-LPCWSTR wxg::App::GetClassName() {
+LPCWSTR myg::App::GetClassName() {
 	return AppClassName;
 }
 
-void wxg::App::Exec() {
+void myg::App::Exec() {
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
@@ -71,8 +71,8 @@ void wxg::App::Exec() {
 	}
 }
 
-wxg::Window *window_temp;
-bool wxg::Window::Create() {
+myg::Window *window_temp;
+bool myg::Window::Create() {
 	if (!IsAppCreated) {
 		throw std::runtime_error("You did not init app!");
 	}
@@ -99,38 +99,38 @@ bool wxg::Window::Create() {
 	return (int)hWnd!=0;
 }
 
-bool wxg::Window::Create(int w, int h, int x, int y, LPCWSTR Title) {
+bool myg::Window::Create(int w, int h, int x, int y, LPCWSTR Title) {
 	if (Title) this->title = Title;
 	pos = WinPos(w, h, x, y);
 	return Create();
 }
 
-wxg::Window::Window(LPCWSTR Title)
+myg::Window::Window(LPCWSTR Title)
 {
 	if (Title) this->title = Title;
 }
 
-wxg::Window::Window(int w, int h, int x, int y, LPCWSTR title)
+myg::Window::Window(int w, int h, int x, int y, LPCWSTR title)
 {
     this->title = title; pos = WinPos(w, h, x, y);
 }
 
-wxg::Window::Window()
+myg::Window::Window()
 {
 }
 
-wxg::Window::~Window() {
+myg::Window::~Window() {
 	Close();
 }
 
-void wxg::Window::Close() {
+void myg::Window::Close() {
     windowMap.erase(hWnd);
 	DestroyWindow(hWnd);
 }
 
-static wxg::Window* FindByHWND(HWND hWnd) {
-	auto it = WinXGui::windowMap.find(hWnd);
-	if (it != WinXGui::windowMap.end()) {
+static myg::Window* FindByHWND(HWND hWnd) {
+	auto it = MyGui::windowMap.find(hWnd);
+	if (it != MyGui::windowMap.end()) {
 		return it->second;
 	}
 	else {
@@ -138,7 +138,7 @@ static wxg::Window* FindByHWND(HWND hWnd) {
 	}
 }
 
-LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK myg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	PAINTSTRUCT ps;
 	HDC hdc;
 	RECT rect;
@@ -160,18 +160,18 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 		break;
 	}
 	case WM_COMMAND: {
-		/*wxg::Window* window = FindByHWND(hwnd);
+		/*myg::Window* window = FindByHWND(hwnd);
 		if (window && window->oncommand) {
 			window->oncommand(hwnd, message, wParam, lParam);
 		}*/
-		wxg::Widget* widget = wmanager.findByHmenu((HMENU)LOWORD(wParam));
+		myg::Widget* widget = wmanager.findByHmenu((HMENU)LOWORD(wParam));
 		if (widget && widget->oncommand) {
            widget->oncommand(hwnd, message, wParam, lParam);
 		}
-		break;
+		return DefWindowProc(hwnd, message, wParam, lParam);
 	}
 	case WM_CLOSE: {
-		wxg::Window* window = FindByHWND(hwnd);
+		myg::Window* window = FindByHWND(hwnd);
 		if (window && window->onclose) {
 			int result = window->onclose(hwnd, message, wParam, lParam);
 			if (result == 0) {
@@ -193,7 +193,7 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 		hBrush = CreateSolidBrush(RGB(240, 240, 240));
 		FillRect(hdc, &rect, hBrush);
 		DeleteObject(hBrush);
-		return 1; // 返回非零值表示已处理背景擦除
+		return 1;
 
 	default:
 		return DefWindowProc(hwnd, message, wParam, lParam);
@@ -201,25 +201,25 @@ LRESULT CALLBACK wxg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 	return 0;
 }
 
-wxg::Widget::Widget(LPCWSTR title_, WinPos pos_) : title(title_), pos(pos_), wid(++lastw) { };
+myg::Widget::Widget(LPCWSTR title_, WinPos pos_) : title(title_), pos(pos_), wid((__HMENU_ != 0 ? __HMENU_ : ++lastw)) { };
 
-void wxg::Widget::RegisterWidget(HWND hwnd)
+void myg::Widget::RegisterWidget(HWND hwnd)
 {
 	wmanager.storeWidget(this, hwnd, wid);
 }
 
-void wxg::Widget::SetText(LPCWSTR title)
+void myg::Widget::SetText(LPCWSTR title)
 {
 	this->title = title;
 	SetWindowText(hWnd, title);
 }
 
-LPCWSTR wxg::Widget::GetText() const
+LPCWSTR myg::Widget::GetText() const
 {
 	return title;
 }
 
-void wxg::Widget::SetEnabled(BOOL enabled_)
+void myg::Widget::SetEnabled(BOOL enabled_)
 {
 	if (this->enabled == enabled_) 
 		return; 
@@ -228,7 +228,7 @@ void wxg::Widget::SetEnabled(BOOL enabled_)
 	UpdateWindow(hWnd);
 };
 
-void wxg::DebugWithSize(size_t bufferSize, const char* _Format, ...) {
+void myg::DebugWithSize(size_t bufferSize, const char* _Format, ...) {
 	char* buffer = new char[bufferSize];
 
 	va_list args;
@@ -241,14 +241,14 @@ void wxg::DebugWithSize(size_t bufferSize, const char* _Format, ...) {
 
 	// Check if buffer overflow occurred
 	if (length < 0 || length >= bufferSize) {
-		OutputDebugStringA("wxg_error: Debug message truncated due to overflow.\n");
+		OutputDebugStringA("myg_error: Debug message truncated due to overflow.\n");
 	}
 	else {
 		OutputDebugStringA(buffer);
 	}
 }
 
-void wxg::Debug(const char* _Format, ...) {
+void myg::Debug(const char* _Format, ...) {
 	const size_t bufferSize = 1024;
 	char buffer[bufferSize];
 

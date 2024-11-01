@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4abefeea-4399-4da1-ab7e-0fa8ef641d50}</ProjectGuid>
-    <RootNamespace>WinXGui</RootNamespace>
+    <RootNamespace>MyGui</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,23 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="WinXGui.h" />
-    <ClInclude Include="WinXGuiAll.h" />
-    <ClInclude Include="WinXGuiButton.h" />
-    <ClInclude Include="WinXGuiCheckbox.h" />
-    <ClInclude Include="WinXGuiConfig.h" />
-    <ClInclude Include="WinXGuiEntry.h" />
-    <ClInclude Include="WinXGuiFont.h" />
-    <ClInclude Include="WinXGuiLabel.h" />
+    <ClInclude Include="MyGui.h" />
+    <ClInclude Include="MyGuiAll.h" />
+    <ClInclude Include="MyGuiButton.h" />
+    <ClInclude Include="MyGuiCheckbox.h" />
+    <ClInclude Include="MyGuiConfig.h" />
+    <ClInclude Include="MyGuiEntry.h" />
+    <ClInclude Include="MyGuiFont.h" />
+    <ClInclude Include="MyGuiLabel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinXGui.cpp" />
+    <ClCompile Include="MyGui.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="WinXGuiButton.cpp" />
-    <ClCompile Include="WinXGuiCheckbox.cpp" />
-    <ClCompile Include="WinXGuiEntry.cpp" />
-    <ClCompile Include="WinXGuiFont.cpp" />
-    <ClCompile Include="WinXGuiLabel.cpp" />
+    <ClCompile Include="MyGuiButton.cpp" />
+    <ClCompile Include="MyGuiCheckbox.cpp" />
+    <ClCompile Include="MyGuiEntry.cpp" />
+    <ClCompile Include="MyGuiFont.cpp" />
+    <ClCompile Include="MyGuiLabel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

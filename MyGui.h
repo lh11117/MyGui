@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _WINXGUI_H_
-#define _WINXGUI_H_
+#ifndef _MYGUI_H_
+#define _MYGUI_H_
 #include <windows.h>
 #include <map>
 #include <string>
@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 
-namespace WinXGui {
+namespace MyGui {
 	class App;
 	class Window;
 	class Widget;
@@ -17,6 +17,8 @@ namespace WinXGui {
 	typedef int(*Event)(HWND, UINT, WPARAM, LPARAM);
 	class Font;
 	class Button;
+	class OkButton;
+	class CancelButton;
 	class Label;
 	class Entry;
 	class Checkbox;
@@ -25,10 +27,10 @@ namespace WinXGui {
 	// window map
 	extern std::map<HWND, Window*> windowMap;
 }
-namespace wxg = WinXGui;
+namespace myg = MyGui;
 
 
-struct wxg::WinPos {
+struct myg::WinPos {
 	int w;
 	int h;
 	int x;
@@ -37,11 +39,11 @@ struct wxg::WinPos {
 	WinPos(int w, int h, int x, int y) :w(w), h(h), x(x), y(y) {};
 };
 
-class wxg::App {
+class myg::App {
 	LPCWSTR AppClassName;
 public:
 	App();
-	// The name will be the window class name of thw windows created by WinXGui and the window class name could not be changed after app has created and this function will init app and if you would not to init the app immediately you can the overloaded function: App() then when your app has been ready to init you can use your_app_class.Init(your_class_name)
+	// The name will be the window class name of thw windows created by MyGui and the window class name could not be changed after app has created and this function will init app and if you would not to init the app immediately you can the overloaded function: App() then when your app has been ready to init you can use your_app_class.Init(your_class_name)
 	App(LPCWSTR name);
 	~App();
 	void Init(LPCWSTR ClassName);
@@ -49,7 +51,7 @@ public:
 	void Exec();
 };
 
-class wxg::Window {
+class myg::Window {
 protected:
 	WNDCLASSEX wc;
 	HWND hWnd;
@@ -62,7 +64,7 @@ public:
 	Window(int w, int h, int x, int y, LPCWSTR title);
 	~Window();
 	bool Create();
-	bool Create(wxg::WinPos pos, LPCWSTR title = NULL) { this->pos = pos; title = title; return Create(); };
+	bool Create(myg::WinPos pos, LPCWSTR title = NULL) { this->pos = pos; title = title; return Create(); };
 	bool Create(int w, int h, int x, int y, LPCWSTR title = NULL);
 	void Show() { ShowWindow(hWnd, SW_SHOW); UpdateWindow(hWnd);};
 	void Hide() { ShowWindow(hWnd, SW_HIDE); };
@@ -77,7 +79,7 @@ public:
 	Event onclose = nullptr;
 };
 
-class wxg::Widget {
+class myg::Widget {
 protected:
 	HWND hWnd = 0;
 	LPCWSTR title;
@@ -87,6 +89,7 @@ protected:
 	HMENU wid;
 	virtual int style() = 0;
 	void RegisterWidget(HWND);
+	HMENU __HMENU_ = 0;
 public:
 	inline BOOL IsVisible() { return visible; };
 	void Show() { visible = TRUE; ShowWindow(hWnd, SW_SHOW); };
@@ -97,5 +100,6 @@ public:
 	virtual void SetText(LPCWSTR title);
 	virtual LPCWSTR GetText() const;
 	Msg oncommand = nullptr;
+	const char* const type = "";
 };
 #endif
