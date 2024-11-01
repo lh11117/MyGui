@@ -70,6 +70,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);include</IncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);include</ExternalIncludePath>
+    <SourcePath>$(VC_SourcePath);src</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -127,23 +132,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="MyGui.h" />
-    <ClInclude Include="MyGuiAll.h" />
-    <ClInclude Include="MyGuiButton.h" />
-    <ClInclude Include="MyGuiCheckbox.h" />
-    <ClInclude Include="MyGuiConfig.h" />
-    <ClInclude Include="MyGuiEntry.h" />
-    <ClInclude Include="MyGuiFont.h" />
-    <ClInclude Include="MyGuiLabel.h" />
+    <ClInclude Include="include/MyGui.h" />
+    <ClInclude Include="include/MyGuiAll.h" />
+    <ClInclude Include="include/MyGuiButton.h" />
+    <ClInclude Include="include/MyGuiCheckbox.h" />
+    <ClInclude Include="include/MyGuiConfig.h" />
+    <ClInclude Include="include/MyGuiEntry.h" />
+    <ClInclude Include="include/MyGuiFont.h" />
+    <ClInclude Include="include/MyGuiLabel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyGui.cpp" />
+    <ClCompile Include="src/MyGui.cpp" />
+    <ClCompile Include="src/MyGuiButton.cpp" />
+    <ClCompile Include="src/MyGuiCheckbox.cpp" />
+    <ClCompile Include="src/MyGuiEntry.cpp" />
+    <ClCompile Include="src/MyGuiFont.cpp" />
+    <ClCompile Include="src/MyGuiLabel.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MyGuiButton.cpp" />
-    <ClCompile Include="MyGuiCheckbox.cpp" />
-    <ClCompile Include="MyGuiEntry.cpp" />
-    <ClCompile Include="MyGuiFont.cpp" />
-    <ClCompile Include="MyGuiLabel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

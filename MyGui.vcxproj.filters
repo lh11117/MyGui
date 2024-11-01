@@ -18,51 +18,51 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyGui.h">
+    <ClInclude Include="include/MyGui.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiButton.h">
+    <ClInclude Include="include/MyGuiAll.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiConfig.h">
+    <ClInclude Include="include/MyGuiButton.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiFont.h">
+    <ClInclude Include="include/MyGuiCheckbox.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiAll.h">
+    <ClInclude Include="include/MyGuiConfig.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiLabel.h">
+    <ClInclude Include="include/MyGuiEntry.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiEntry.h">
+    <ClInclude Include="include/MyGuiFont.h">
       <Filter>MyGui</Filter>
     </ClInclude>
-    <ClInclude Include="MyGuiCheckbox.h">
+    <ClInclude Include="include/MyGuiLabel.h">
       <Filter>MyGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyGui.cpp">
-      <Filter>MyGui</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MyGuiButton.cpp">
+    <ClCompile Include="src/MyGui.cpp">
       <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="MyGuiFont.cpp">
+    <ClCompile Include="src/MyGuiButton.cpp">
       <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="MyGuiLabel.cpp">
+    <ClCompile Include="src/MyGuiCheckbox.cpp">
       <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="MyGuiEntry.cpp">
+    <ClCompile Include="src/MyGuiEntry.cpp">
       <Filter>MyGui</Filter>
     </ClCompile>
-    <ClCompile Include="MyGuiCheckbox.cpp">
+    <ClCompile Include="src/MyGuiFont.cpp">
+      <Filter>MyGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src/MyGuiLabel.cpp">
       <Filter>MyGui</Filter>
     </ClCompile>
   </ItemGroup>
