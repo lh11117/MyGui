@@ -7,7 +7,6 @@
 #include <exception>
 #include <stdexcept>
 
-
 namespace MyGui {
 	class App;
 	class Window;

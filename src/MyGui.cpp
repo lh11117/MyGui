@@ -89,14 +89,14 @@ bool myg::Window::Create() {
 		wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 		wc.lpszMenuName = NULL;
 		wc.lpszClassName = app->GetClassName();
-		if (!RegisterClassEx(&wc))
+		if (!RegisterClassExW(&wc))
 		{
 			return false;
 		}
 	}
 	IsRegisteredWindowClass = true;
-	hWnd = CreateWindow(app->GetClassName(), title, WS_OVERLAPPEDWINDOW, pos.x, pos.y, pos.w, pos.h, NULL, NULL, GetModuleHandle(0), NULL);
-	return (int)hWnd!=0;
+	hWnd = CreateWindowW(app->GetClassName(), title, WS_OVERLAPPEDWINDOW, pos.x, pos.y, pos.w, pos.h, NULL, NULL, GetModuleHandle(0), NULL);
+	return (intptr_t)hWnd!=0;
 }
 
 bool myg::Window::Create(int w, int h, int x, int y, LPCWSTR Title) {
@@ -164,7 +164,7 @@ LRESULT CALLBACK myg::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 		if (window && window->oncommand) {
 			window->oncommand(hwnd, message, wParam, lParam);
 		}*/
-		myg::Widget* widget = wmanager.findByHmenu((HMENU)LOWORD(wParam));
+		myg::Widget* widget = wmanager.findByHmenu(reinterpret_cast<HMENU>(LOWORD(wParam)));
 		if (widget && widget->oncommand) {
            widget->oncommand(hwnd, message, wParam, lParam);
 		}
@@ -211,7 +211,7 @@ void myg::Widget::RegisterWidget(HWND hwnd)
 void myg::Widget::SetText(LPCWSTR title)
 {
 	this->title = title;
-	SetWindowText(hWnd, title);
+	SetWindowTextW(hWnd, title);
 }
 
 LPCWSTR myg::Widget::GetText() const
@@ -224,7 +224,7 @@ void myg::Widget::SetEnabled(BOOL enabled_)
 	if (this->enabled == enabled_) 
 		return; 
 	this->enabled = enabled_; 
-	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) ^ WS_DISABLED);
+	SetWindowLongW(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) ^ WS_DISABLED);
 	UpdateWindow(hWnd);
 };
 
